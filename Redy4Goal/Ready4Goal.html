@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ready4Goal</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Arial", sans-serif;
+                line-height: 1.6;
+                color: #333;
+            }
+
+            /* Header */
+            .header {
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+                color: white;
+                padding: 1rem 0;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+                font-weight: bold;
+                color: #00ff88;
+            }
+
+            .nav-menu {
+                display: flex;
+                list-style: none;
+                gap: 2rem;
+            }
+
+            .nav-menu a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+            .nav-menu a:hover {
+                color: #00ff88;
+            }
+
+            /* Hero Section */
+            .hero {
+                background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%2315803d" width="1200" height="600"/><circle cx="600" cy="300" r="50" fill="%23ffffff" opacity="0.1"/><rect x="0" y="280" width="1200" height="40" fill="%23ffffff" opacity="0.05"/><rect x="580" y="0" width="40" height="600" fill="%23ffffff" opacity="0.05"/></svg>');
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                color: white;
+                margin-top: 70px;
+            }
+
+            .hero-content h1 {
+                background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%2315803d" width="1200" height="600"/><circle cx="600" cy="300" r="50" fill="%23ffffff" opacity="0.1"/><rect x="0" y="280" width="1200" height="40" fill="%23ffffff" opacity="0.05"/><rect x="580" y="0" width="40" height="600" fill="%23ffffff" opacity="0.05"/></svg>');
+            
+                font-size: 3.5rem;
+                margin-bottom: 1rem;
+                opacity: 0;
+                animation: fadeInUp 1s 0.5s forwards;
+            }
+
+            .hero-content p {
+                font-size: 1.3rem;
+                margin-bottom: 2rem;
+                opacity: 0;
+                animation: fadeInUp 1s 1s forwards;
+            }
+
+            .cta-button {
+                background: linear-gradient(45deg, #00ff88, #00cc6a);
+                color: white;
+                padding: 1rem 2rem;
+                border: none;
+                border-radius: 50px;
+                font-size: 1.1rem;
+                cursor: pointer;
+                transition:
+                    transform 0.3s,
+                    box-shadow 0.3s;
+                text-decoration: none;
+                display: inline-block;
+                opacity: 0;
+                animation: fadeInUp 1s 1.5s forwards;
+            }
+
+            .cta-button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
+            }
+
+            /* Programs Section */
+            .programs {
+                padding: 5rem 2rem;
+                background: #f8f9fa;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .section-title {
+                text-align: center;
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+                color: #1a1a2e;
+            }
+
+            .programs-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 2rem;
+                margin-top: 3rem;
+            }
+
+            .program-card {
+                background: white;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition:
+                    transform 0.3s,
+                    box-shadow 0.3s;
+            }
+
+            .program-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            }
+
+            .program-icon {
+                background: linear-gradient(45deg, #00ff88, #00cc6a);
+                height: 150px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 3rem;
+                color: white;
+            }
+
+            .program-content {
+                padding: 2rem;
+            }
+
+            .program-content h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                color: #1a1a2e;
+            }
+
+            .program-content p {
+                color: #666;
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+
+            .program-features {
+                list-style: none;
+            }
+
+            .program-features li {
+                padding: 0.5rem 0;
+                color: #666;
+                position: relative;
+                padding-left: 1.5rem;
+            }
+
+            .program-features li:before {
+                content: "⚽";
+                position: absolute;
+                left: 0;
+                color: #00ff88;
+            }
+
+            /* About Section */
+            .about {
+                padding: 5rem 2rem;
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+                color: white;
+            }
+
+            .about-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: center;
+            }
+
+            .about-text h2 {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+                color: #00ff88;
+            }
+
+            .about-text p {
+                font-size: 1.1rem;
+                line-height: 1.8;
+                margin-bottom: 1.5rem;
+            }
+
+            .stats {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .stat {
+                text-align: center;
+                padding: 1.5rem;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+                font-weight: bold;
+                color: #00ff88;
+                display: block;
+            }
+
+            .stat-label {
+                font-size: 0.9rem;
+                opacity: 0.8;
+            }
+
+            /* Contact Section */
+            .contact {
+                padding: 5rem 2rem;
+                background: #f8f9fa;
+            }
+
+            .contact-form {
+                max-width: 600px;
+                margin: 0 auto;
+                background: white;
+                padding: 3rem;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: #333;
+                font-weight: bold;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 1rem;
+                border: 2px solid #e1e1e1;
+                border-radius: 10px;
+                font-size: 1rem;
+                transition: border-color 0.3s;
+            }
+
+            .form-group input:focus,
+            .form-group select:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: #00ff88;
+            }
+
+            .submit-btn {
+                background: linear-gradient(45deg, #00ff88, #00cc6a);
+                color: white;
+                padding: 1rem 2rem;
+                border: none;
+                border-radius: 50px;
+                font-size: 1.1rem;
+                cursor: pointer;
+                width: 100%;
+                transition: transform 0.3s;
+            }
+
+            .submit-btn:hover {
+                transform: translateY(-2px);
+            }
+
+            /* Footer */
+            .footer {
+                background: #1a1a2e;
+                color: white;
+                padding: 3rem 2rem 1rem;
+                text-align: center;
+            }
+
+            .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-section h3 {
+                color: #00ff88;
+                margin-bottom: 1rem;
+            }
+
+            .footer-section p,
+            .footer-section ul {
+                line-height: 1.8;
+            }
+
+            .footer-section ul {
+                list-style: none;
+            }
+
+            .footer-section ul li {
+                margin-bottom: 0.5rem;
+            }
+
+            .footer-bottom {
+                border-top: 1px solid #333;
+                padding-top: 1rem;
+                opacity: 0.7;
+            }
+
+            /* Animations */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Mobile Responsiveness */
+            @media (max-width: 768px) {
+                .nav-menu {
+                    display: none;
+                }
+
+                .hero-content h1 {
+                    font-size: 2.5rem;
+                }
+
+                .hero-content p {
+                    font-size: 1.1rem;
+                }
+
+                .about-content {
+                    grid-template-columns: 1fr;
+                    gap: 2rem;
+                }
+
+                .programs-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .stats {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="nav-container">
+                <div class="logo">Ready4Goal</div>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="registration.php">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Develop Future Champions</h1>
+                <p>Professional football training for young talents</p>
+               <!--   <a href="#programs" class="cta-button">Explore Programs</a> -->
+            </div>
+        </section>
+
+        <!-- Programs Section -->
+        <section class="programs" id="programs">
+            <div class="container">
+                <h2 class="section-title">Training Programs</h2>
+                <div class="programs-grid">
+                    <div class="program-card">
+                        <div class="program-icon">🏆</div>
+                        <div class="program-content">
+                            <h3>Youth Development</h3>
+                            <p>
+                                Foundation program focusing on fun, basic skills, and team spirit. Our holistic approach
+                                helps children develop their full potential through innovative training methods.
+                            </p>
+                            <ul class="program-features">
+                                <li>Basic ball control and technique</li>
+                                <li>Team play and cooperation</li>
+                                <li>Fun-based learning approach</li>
+                                <li>Character development</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="program-card">
+                        <div class="program-icon">⚡</div>
+                        <div class="program-content">
+                            <h3>Summer Training Camps</h3>
+                            <p>
+                                Intensive summer camps in professional facilities. Experience unforgettable weeks filled
+                                with fun and elite-level training.
+                            </p>
+                            <ul class="program-features">
+                                <li>Professional coaching staff</li>
+                                <li>State-of-the-art facilities</li>
+                                <li>Daily training sessions</li>
+                                <li>Cultural activities included</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="program-card">
+                        <div class="program-icon">🎯</div>
+                        <div class="program-content">
+                            <h3>Elite Academy Training</h3>
+                            <p>
+                                Advanced program for serious young players. Professional environment with expert coaches
+                                focusing on technique, tactics, and mentality.
+                            </p>
+                            <ul class="program-features">
+                                <li>Advanced tactical training</li>
+                                <li>Mental strength development</li>
+                                <li>Individual skill assessment</li>
+                                <li>Pathway to professional clubs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Our Mission</h2>
+                        <p>
+                            We accompany young talents on their journey and promote our next generation with a holistic
+                            training concept. Inspired by success stories, values, and experiences of elite football, we
+                            help children unfold their full potential with fun, heart, and intelligence.
+                        </p>
+                        <p>
+                            Our academy combines daily league operations with numerous additional training opportunities
+                            for children and teenagers, creating a complete football development ecosystem.
+                        </p>
+                    </div>
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Young Athletes Trained</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Professional Coaches</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Training Camps Annually</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Years of Excellence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Ready4Goal</h3>
+                    <p>
+                        Developing future champions through professional training, innovative methods, and a passion for
+                        excellence.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li>Youth Development</li>
+                        <li>Summer Training Camps</li>
+                        <li>Elite Academy Training</li>
+                        <li>Group Training Programs</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>
+                        📍 Ready4Goal<br />
+                        📞 +1 (555) 123-4567<br />
+                        ✉️ info@ready4goal.com
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ready4Goal. All rights reserved</p>
+            </div>
+        </footer>
+
+        <script>
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute("href")).scrollIntoView({
+                        behavior: "smooth"
+                    });
+                });
+            });
+
+            // Form submission handler
+            function handleSubmit(event) {
+                event.preventDefault();
+
+                // Get form data
+                const formData = new FormData(event.target);
+                const data = Object.fromEntries(formData.entries());
+
+                // Simulate form submission
+                alert(
+                    `Thank you for your interest! We'll contact you soon about the ${data.program} program for ${data.name}.`
+                );
+
+                // Reset form
+                event.target.reset();
+            }
+
+            // Add scroll effect to header
+            window.addEventListener("scroll", function () {
+                const header = document.querySelector(".header");
+                if (window.scrollY > 100) {
+                    header.style.background = "rgba(26, 26, 46, 0.95)";
+                } else {
+                    header.style.background = "linear-gradient(135deg, #1a1a2e, #16213e)";
+                }
+            });
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, observerOptions);
+
+            // Observe program cards
+            document.querySelectorAll(".program-card").forEach((card) => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(30px)";
+                card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                observer.observe(card);
+            });
+        </script>
+    </body>
+</html>

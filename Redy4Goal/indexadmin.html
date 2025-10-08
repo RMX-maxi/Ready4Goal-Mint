@@ -1,0 +1,89 @@
+<?php
+session_start();
+
+// Check if admin is logged in
+if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
+    header("Location: login.php?error=Unauthorized access");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0099cc;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      margin-bottom: 1.5rem;
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    a.btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      background: #0099cc;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    a.btn:hover {
+      background: #0077aa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome, Admin <?php echo $_SESSION['name']; ?> 👋</h1>
+  </header>
+  <div class="container">
+
+    <div class="card">
+      <h3>Manage Users</h3>
+      <p>Add, update, or remove users from the system.</p>
+      <a href="manage_users.php" class="btn">Go to Users</a>
+    </div>
+
+    <div class="card">
+      <h3>Manage Coaches</h3>
+      <p>Review and approve coaches or assign them to academies.</p>
+      <a href="manage_coaches.php" class="btn">Go to Coaches</a>
+    </div>
+
+    <div class="card">
+      <h3>Manage Academies</h3>
+      <p>View and approve academy registrations.</p>
+      <a href="manage_academies.php" class="btn">Go to Academies</a>
+    </div>
+
+    <div class="card">
+      <h3>Reports</h3>
+      <p>View performance, usage, and system reports.</p>
+      <a href="reports.php" class="btn">View Reports</a>
+    </div>
+
+    <a href="logout.php" class="btn">Logout</a>
+  </div>
+</body>
+</html>

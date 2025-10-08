@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Player Login</title>
+  <style>
+    body { font-family: Arial; background:#f5f5f5; display:flex; justify-content:center; align-items:center; height:100vh; }
+    .login-box { background:#fff; padding:2rem; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.2); width:300px; }
+    h2 { text-align:center; }
+    label { display:block; margin-top:10px; }
+    input { width:100%; padding:0.6rem; margin-top:5px; border:1px solid #ccc; border-radius:5px; }
+    button { margin-top:1rem; width:100%; padding:0.7rem; background:#0099cc; border:none; color:#fff; border-radius:5px; cursor:pointer; }
+    button:hover { background:#0077aa; }
+    .error { color:red; margin-top:10px; text-align:center; }
+    .register-link { display:block; margin-top:10px; text-align:center; text-decoration:none; color:#0099cc; font-weight:bold; }
+    .register-link:hover { color:#0077aa; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Player Login</h2>
+    <form method="POST" action="player_login_process.php">
+      <label>Email:</label>
+      <input type="email" name="email" required>
+
+      <label>Password:</label>
+      <input type="password" name="password" required>
+
+      <button type="submit" name="login_submit">Login</button>
+    </form>
+    
+    <!-- Registration link below login button -->
+    <a href="player_register.php" class="register-link">New Player? Register Here</a>
+
+    <div class="error">
+      <?php if(isset($_GET['error'])) echo htmlspecialchars($_GET['error']); ?>
+    </div>
+  </div>
+</body>
+</html>
